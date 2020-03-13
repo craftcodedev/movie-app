@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  movie_app_node_js:
+    build: ./node-js
+    volumes:
+      - ./../../:/var/www/app
+    ports:
+      - "9333:9333"
+    environment:
+      - APP_ENV=dev
