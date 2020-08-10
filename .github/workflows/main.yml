@@ -9,10 +9,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: define variables
+        env:
+          APP_NAME = "movil-app"
+          ENVIRONMENT = "dev"
+          RELEASE_VERSION = ${GITHUB_SHA}
+          REGISTRY = "eu.gcr.io/craft-code-255613/${APP_NAME}-${ENVIRONMENT}"
+          IMAGE = "${REGISTRY}:${RELEASE_VERSION}"
       - name: build
-        run: docker build . --file etc/docker/Dockerfile --tag craftcode/movie-app
+        run: docker build . --file etc/docker/Dockerfile --tag ${IMAGE}
       - name: tests
-        run: docker run -w /var/app/ -i docker_movie_app_node_js node_modules/mocha/bin/mocha
+        run: docker run -w /var/app/ -i ${IMAGE} node_modules/mocha/bin/mocha
 
       #añado el uso de artefactos: todo el codigo compilado lo publico en algun sitio donde un job(deploy) siguiente pueda recogerlo y desplegarlo
       #- name: publish de code
