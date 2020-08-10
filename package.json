@@ -3,12 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.0",
+    "body-parser": "^1.5.1",
+    "cors": "^2.8.5",
+    "express": "^4.7.1",
     "jsonapi-serializer": "^3.5.6"
   },
   "scripts": {
     "app": "node app.js"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "^8.1.1"
+  }
 }

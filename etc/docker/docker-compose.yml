@@ -2,7 +2,9 @@ version: '3'
 
 services:
   movie_app_node_js:
-    build: .
+    build:
+      context: ./../../
+      dockerfile: etc/docker/Dockerfile
     volumes:
       - ./../../:/var/app
     ports:
