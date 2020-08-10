@@ -22,9 +22,9 @@ jobs:
           ENVIRONMENT: dev
           RELEASE_VERSION: ${GITHUB_SHA}
           REGISTRY: eu.gcr.io/craft-code-255613/${APP_NAME}-${ENVIRONMENT}
-          IMAGE: ${REGISTRY}:${RELEASE_VERSION}
+          IMAGE: $REGISTRY:$RELEASE_VERSION
       - name: build
-        run: docker build . --file etc/docker/Dockerfile --tag $APP_NAME
+        run: docker build . --file etc/docker/Dockerfile --tag ${APP_NAME}
       - name: tests
         run: docker run -w /var/app/ -i $IMAGE node_modules/mocha/bin/mocha
 
