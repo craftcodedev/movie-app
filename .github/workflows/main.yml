@@ -18,9 +18,9 @@ jobs:
           REGISTRY: "eu.gcr.io/craft-code-255613/${APP_NAME}-${ENVIRONMENT}"
           IMAGE: "${REGISTRY}:${RELEASE_VERSION}"
       - name: build
-        run: docker build . --file etc/docker/Dockerfile --tag ${IMAGE}
+        run: docker build . --file etc/docker/Dockerfile --tag $IMAGE
       - name: tests
-        run: docker run -w /var/app/ -i ${IMAGE} node_modules/mocha/bin/mocha
+        run: docker run -w /var/app/ -i $IMAGE node_modules/mocha/bin/mocha
 
       #añado el uso de artefactos: todo el codigo compilado lo publico en algun sitio donde un job(deploy) siguiente pueda recogerlo y desplegarlo
       #- name: publish de code
