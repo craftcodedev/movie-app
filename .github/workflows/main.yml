@@ -10,6 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: define variables
+        run: echo define variables
         env:
           APP_NAME = "movil-app"
           ENVIRONMENT = "dev"
