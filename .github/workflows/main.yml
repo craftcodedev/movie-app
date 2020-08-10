@@ -19,7 +19,7 @@ jobs:
       - name: define variables
         run: echo define variables $APP_NAME $IMAGE
       - name: build
-        run: docker build . --file etc/docker/Dockerfile --tag APP_NAME
+        run: docker build . --file etc/docker/Dockerfile --tag $APP_NAME
       - name: tests
         run: docker run -w /var/app/ -i $IMAGE node_modules/mocha/bin/mocha
 
