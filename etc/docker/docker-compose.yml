@@ -2,9 +2,9 @@ version: '3'
 
 services:
   movie_app_node_js:
-    build: ./node-js
+    build: .
     volumes:
-      - ./../../:/var/www/app
+      - ./../../:/var/app
     ports:
       - "9333:9333"
     environment:
