@@ -15,7 +15,8 @@ jobs:
         run: |
           echo ::set-env name=RELEASE_VERSION::$GITHUB_SHA
           echo ::set-env name=REGISTRY::eu.gcr.io/craft-code-255613/$APP_NAME-$ENVIRONMENT
-          echo ::set-env name=IMAGE::${{env.REGISTRY}}:${env.RELEASE_VERSION}
+      - name: Set IMAGE variable
+        run: echo ::set-env name=IMAGE::$REGISTRY:$RELEASE_VERSION
       - name: define variables
         run: echo define variables $RELEASE_VERSION $IMAGE
       #- name: Checkout
