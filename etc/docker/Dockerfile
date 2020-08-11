@@ -17,5 +17,4 @@ FROM base as production
 
 ENV NODE_ENV=production
 RUN npm install --production
-RUN npm run build
 CMD [ "npm", "app"]

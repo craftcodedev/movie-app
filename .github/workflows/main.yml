@@ -45,3 +45,6 @@ jobs:
         run: docker build . --file etc/docker/Dockerfile --target production --tag $IMAGE
       - name: Push the Docker image to Google Container Registry
         run: docker push $GCP_REGISTRY_HOSTNAME/$GCP_PROJECT_ID/$IMAGE
+#PENDING
+#DEPLOY
+#DOCKER HUB
