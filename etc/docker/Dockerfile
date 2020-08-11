@@ -1,10 +1,9 @@
-FROM node:10
+FROM node:10 as base
 
 MAINTAINER Craft-Code
 
 WORKDIR /var/app
 COPY package*.json ./
-RUN npm install
 COPY . ./
 
 FROM base as development
