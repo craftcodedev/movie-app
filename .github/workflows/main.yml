@@ -12,7 +12,7 @@ jobs:
       GKE_ZONE: us-west1-a
       GCP_PROJECT_ID: craft-code-255613
       GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-      REGISTRY_HOSTNAME: eu.gcr.io
+      GCP_REGISTRY_HOSTNAME: eu.gcr.io
       #RELEASE_VERSION: $GITHUB_SHA
     
     steps:
@@ -20,28 +20,23 @@ jobs:
         run: echo ::set-env name=IMAGE::$APP_NAME-$ENVIRONMENT:$GITHUB_SHA
       - name: Checkout
         uses: actions/checkout@v2
-      #- name: build
-      #  run: docker build . --file etc/docker/Dockerfile --tag $IMAGE
-      #- name: tests
-      #  run: docker run -w /var/app/ -i $IMAGE node_modules/mocha/bin/mocha
-      # Setup gcloud CLI
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - name: build
+        run: docker build . --file etc/docker/Dockerfile --tag $IMAGE
+      - name: tests
+        run: docker run -w /var/app/ -i $IMAGE node_modules/mocha/bin/mocha
+      - name: Setup GCLOUD CLI
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '290.0.1'
-          #project_id: ${{GCP_PROJECT_ID}}
           service_account_key: ${{ env.GCP_SA_KEY }}
           export_default_credentials: true
-      - run: gcloud info
-
-      # Configure docker to use the gcloud command-line tool as a credential helper
-      #- run: |
+      - name: Configure docker to use the gcloud command-line tool as a credential helper
+        run: |
           # Set up docker to authenticate
           # via gcloud command-line tool.
-      #    gcloud auth configure-docker
-      # Push the Docker image to Google Container Registry
-      #- name: Publish
-      #  run: |
-      #    docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+          gcloud auth configure-docker
+      - name: Push the Docker image to Google Container Registry
+        run: docker push $GCP_REGISTRY_HOSTNAME/$GCP_PROJECT_ID/$IMAGE
       #- name: define variables
       #  run: echo define variables $RELEASE_VERSION $IMAGE
 
