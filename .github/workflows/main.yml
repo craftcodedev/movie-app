@@ -10,6 +10,7 @@ jobs:
       APP_NAME: movil-app
       ENVIRONMENT: dev
       RELEASE_VERSION: ${ env.GITHUB_SHA }
+      PDD: ${{ env.APP_NAME }}
     
     steps:
       - name: Set registry env
@@ -17,9 +18,9 @@ jobs:
       - name: Set image env
         run: echo ::set-env name=IMAGE::$REGISTRY:$RELEASE_VERSION
       - name: define variables
-        run: echo define variables $APP_NAME $IMAGE
-      - name: Checkout
-        uses: actions/checkout@v2
+        run: echo define variables $PDD $PDD $IMAGE
+      #- name: Checkout
+      #  uses: actions/checkout@v2
       #- name: build
       #  run: docker build . --file etc/docker/Dockerfile --tag $IMAGE
       #- name: tests
