@@ -9,16 +9,15 @@ jobs:
     env:
       APP_NAME: movil-app
       ENVIRONMENT: dev
-      RELEASE_VERSION: ${ env.GITHUB_SHA }
-      PDD: ${{ env.APP_NAME }}
     
     steps:
-      - name: Set registry env
-        run: echo ::set-env name=REGISTRY::eu.gcr.io/craft-code-255613/$APP_NAME-$ENVIRONMENT
-      - name: Set image env
-        run: echo ::set-env name=IMAGE::$REGISTRY:$RELEASE_VERSION
+      - name: Set environment variables
+        run: |
+          echo ::set-env name=RELEASE_VERSION::$GITHUB_SHA
+          echo ::set-env name=REGISTRY::eu.gcr.io/craft-code-255613/$APP_NAME-$ENVIRONMENT
+          echo ::set-env name=IMAGE::$REGISTRY:$RELEASE_VERSION
       - name: define variables
-        run: echo define variables $PDD $PDD $IMAGE
+        run: echo define variables $RELEASE_VERSION $IMAGE
       #- name: Checkout
       #  uses: actions/checkout@v2
       #- name: build
