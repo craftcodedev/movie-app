@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm install
 COPY . ./
 
-ROM base as development
+FROM base as development
 
 ENV NODE_ENV=development
 RUN npm install
