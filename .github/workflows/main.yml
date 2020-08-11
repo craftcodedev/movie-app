@@ -26,11 +26,10 @@ jobs:
       GCP_PROJECT_ID: craft-code-255613
       GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
       GCP_REGISTRY_HOSTNAME: eu.gcr.io
-      RELEASE_VERSION: ${{ env.GITHUB_SHA }}
     
     steps:
       - name: Set IMAGE variables
-        run: echo ::set-env name=IMAGE::$APP_NAME-$ENVIRONMENT:$RELEASE_VERSION
+        run: echo ::set-env name=IMAGE::$APP_NAME-$ENVIRONMENT:$GITHUB_SHA
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup gcloud CLI
