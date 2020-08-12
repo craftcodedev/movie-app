@@ -10,11 +10,11 @@ FROM base as development
 
 ENV NODE_ENV=development
 RUN npm install
-CMD [ "npm", "app"]
+CMD [ "npm", "run", "app"]
 
 
 FROM base as production
 
 ENV NODE_ENV=production
 RUN npm install --production
-CMD [ "npm", "app"]
+CMD [ "npm", "run", "app"]
