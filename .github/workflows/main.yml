@@ -27,6 +27,8 @@ jobs:
       GCP_PROJECT_ID: craft-code-255613
       GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
       GCP_REGISTRY_HOSTNAME: eu.gcr.io
+      GCE_INSTANCE: movie-app
+      GCE_INSTANCE_ZONE: europe-west1-b
     
     steps:
       - name: Set IMAGE variables
@@ -45,6 +47,8 @@ jobs:
         run: docker build . --file etc/docker/Dockerfile --target production --tag $GCP_REGISTRY_HOSTNAME/$GCP_PROJECT_ID/$IMAGE
       - name: Push the Docker image to Google Container Registry
         run: docker push $GCP_REGISTRY_HOSTNAME/$GCP_PROJECT_ID/$IMAGE
-#PENDING
-#DEPLOY
-#DOCKER HUB
+      - name: Deploy
+        run: |-
+          gcloud compute instances update-container "$GCE_INSTANCE" \
+          --zone "$GCE_INSTANCE_ZONE" \
+          --container-image "$GCP_REGISTRY_HOSTNAME/$GCP_PROJECT_ID/$IMAGE"
