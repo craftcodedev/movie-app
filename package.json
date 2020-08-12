@@ -9,7 +9,7 @@
     "jsonapi-serializer": "^3.5.6"
   },
   "scripts": {
-    "app": "node app.js"
+    "app": "node src/app.js"
   },
   "devDependencies": {
     "mocha": "^8.1.1"
