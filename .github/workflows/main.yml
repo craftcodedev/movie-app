@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, master]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    
+    env:
+      IMAGE: craft-code:movil-app
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: build
+        run: docker build . --file etc/docker/Dockerfile --target development --tag $IMAGE
+      - name: tests
+        run: docker run -w /var/app/ -i $IMAGE node_modules/mocha/bin/mocha
